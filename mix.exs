@@ -17,7 +17,7 @@ defmodule ReleaseManager.Mixfile do
   ]
 
   def deps do
-    [{:relx, "~> 3.5" },
+    [{:relx, "~> 3.24" },
      {:earmark, "~> 1.0", only: :dev},
      {:ex_doc, "~> 0.13", only: :dev},
      {:coverex, "~> 1.4", only: :test}]
