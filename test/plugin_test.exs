@@ -1,6 +1,5 @@
 defmodule PluginTest do
   use ExUnit.Case
-  alias ReleaseManager.Utils
 
   test "can fetch a list of plugins" do
     active = [

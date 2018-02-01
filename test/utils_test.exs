@@ -2,8 +2,6 @@ defmodule UtilsTest do
   use ExUnit.Case, async: true
   use Bitwise, only_operators: true
 
-  import ExUnit.CaptureIO
-
   import PathHelpers
 
   alias ReleaseManager.Utils
@@ -35,6 +33,7 @@ defmodule UtilsTest do
   test "can read terms from string" do
     config   = @expected_path |> File.read!
     expected = @expected_path |> Utils.read_terms
+
     terms    = Utils.string_to_terms(config)
 
     assert expected == terms
@@ -70,7 +69,7 @@ defmodule UtilsTest do
     elixir_path = Utils.get_elixir_lib_paths |> Enum.filter(&(String.ends_with?("/elixir/ebin", &1)))
     path        = Path.join(elixir_path, "../bin/elixir")
     {result, _} = System.cmd(path, ["--version"])
-    version     = result |> String.strip(?\n)
+    version     = result |> String.trim()
     assert String.contains?(version, "Elixir #{System.version}")
   end
 
@@ -92,7 +91,7 @@ defmodule UtilsTest do
         assert {result, 0} = System.cmd(bin_path, ["stop"])
         assert String.contains?(result, "ok")
         sys_config_path = Path.join([File.cwd!, "rel", "test", "running-config", "sys.config"])
-        {res, sysconfig_content} = :file.consult(to_char_list(sys_config_path))
+        {res, sysconfig_content} = :file.consult(to_charlist(sys_config_path))
         assert :ok = res
         some_val = Keyword.get(List.first(sysconfig_content), :test) |> Keyword.get(:some_val)
         assert 101 = some_val
