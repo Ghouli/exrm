@@ -4,7 +4,7 @@ defmodule FakeProject.Mixfile do
   def project do
     [app: :fake_project,
      version: "0.0.1",
-     deps: deps]
+     deps: deps()]
   end
 
   # Configuration for the OTP application

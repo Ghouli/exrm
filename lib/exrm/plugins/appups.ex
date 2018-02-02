@@ -41,9 +41,13 @@ defmodule ReleaseManager.Plugin.Appups do
         cond do
           current_app_version == last_app_version -> :ok
           appup_exists? ->
-            Logger.debug "#{app} requires an appup, and one was provided, skipping generation.."
+            Logger.debug fn ->
+              "#{app} requires an appup, and one was provided, skipping generation.."
+            end
           true ->
-            Logger.debug "#{app} requires an appup, but it wasn't provided, one will be generated for you.."
+            Logger.debug fn ->
+              "#{app} requires an appup, but it wasn't provided, one will be generated for you.."
+            end
             case Appups.make(app, last_app_version, current_app_version, v1_path, v2_path) do
               {:error, reason} ->
                 Logger.error "Failed to generate appup for #{app}: #{reason}"

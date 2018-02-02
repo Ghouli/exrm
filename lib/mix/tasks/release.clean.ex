@@ -34,7 +34,9 @@ defmodule Mix.Tasks.Release.Clean do
   def do_run(args) do
     app     = Mix.Project.config |> Keyword.get(:app)
     version = Mix.Project.config |> Keyword.get(:version)
-    Logger.debug "Removing release files for #{app}-#{version}..."
+    Logger.debug fn ->
+      "Removing release files for #{app}-#{version}..."
+    end
     cond do
       "--implode" in args ->
         if "--no-confirm" in args or confirm_implode?(app) do

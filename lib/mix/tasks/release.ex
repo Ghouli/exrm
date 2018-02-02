@@ -140,7 +140,9 @@ defmodule Mix.Tasks.Release do
     user_config_path = rel_dest_path @_RELXCONF
     merged = case user_config_path |> File.exists? do
       true  ->
-        Logger.debug "Merging custom relx configuration from #{user_config_path |> Path.relative_to_cwd}..."
+        Logger.debug fn ->
+          "Merging custom relx configuration from #{user_config_path |> Path.relative_to_cwd}..."
+        end
         case Utils.read_terms(user_config_path) do
           []                                      -> relx_config
           [{_, _}|_] = user_config                -> Utils.merge(relx_config, user_config)
@@ -167,7 +169,9 @@ defmodule Mix.Tasks.Release do
     # default sys.config is used, the project config will take precedence instead.
     merged = case user_sysconfig |> File.exists? do
       true ->
-        Logger.debug "Merging custom sys.config from #{user_sysconfig |> Path.relative_to_cwd}..."
+        Logger.debug fn ->
+          "Merging custom sys.config from #{user_sysconfig |> Path.relative_to_cwd}..."
+        end
         # User-provided
         case user_sysconfig |> Utils.read_terms do
           []                                  -> project_conf

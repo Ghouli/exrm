@@ -43,7 +43,6 @@ defmodule ReleaseManager.Plugin do
   the callbacks reflect. The `before_release/1` callback is called after some internal tasks,
   such as generating the sys.config and others.
   """
-  use Behaviour
 
   @doc """
   A plugin needs to implement `before_release/1`, and `after_release/1`
