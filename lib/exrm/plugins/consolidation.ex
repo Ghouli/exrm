@@ -27,7 +27,7 @@ defmodule ReleaseManager.Plugin.Consolidation do
       debug "Packaging consolidated protocols..."
 
       # Add overlay to relx.config which copies consolidated dir to release
-      consolidated_path = Path.join([Mix.Project.build_path, "consolidated"])
+      consolidated_path = Path.join([Mix.Project.build_path, "lib/#{config.name}/consolidated"])
       case File.ls(consolidated_path) do
         {:error, _} ->
           config
